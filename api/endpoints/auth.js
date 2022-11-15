@@ -1,46 +1,42 @@
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
 
 const router = express.Router();
 
-const prisma = new PrismaClient();
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
-const jwt = require("jsonwebtoken");
-const { v4: uuidv4 } = require("uuid");
+const { login, signup } = require("../services/auth");
 
+/**
+ * Login using email and password, returns a jwt token
+ */
 router.post("/login", jsonParser, async (req, res, next) => {
   let { email, password } = req.body;
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      email: email,
-    },
-  });
-  if (!existingUser || existingUser.password !== password) {
-    const error = Error(
-      "Unable to authenticate you, incorrect username or password."
-    );
+  try {
+    res.send(await login(email, password));
+  } catch (error) {
+    if (error.name === "AuthenticationError") {
+      return res
+        .status(401)
+        .send("Unable to authenticate you, incorrect email or password");
+    }
     return next(error);
   }
-  let token = jwt.sign(
-    { userId: existingUser.id, email: existingUser.email },
-    process.env.JWT_SECRET,
-    { expiresIn: "1h" }
-  );
-
-  res.send(token);
 });
 
+/**
+ * Signup using email and password
+ */
 router.post("/signup", jsonParser, async (req, res, next) => {
   const { email, password } = req.body;
-  await prisma.user.create({
-    data: {
-      id: uuidv4(),
-      email: email,
-      password: password,
-    },
-  });
-  res.send("Signup successful.");
+  try {
+    await signup(email, password);
+    return res.send("Signup successful.");
+  } catch (error) {
+    if (error.name === "DuplicatedUserEmailError") {
+      return res.status(409).send("Email already used.");
+    }
+    next(error);
+  }
 });
 
 module.exports = router;

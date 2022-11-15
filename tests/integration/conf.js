@@ -1,11 +1,11 @@
-const createApp = require("../../app");
+const createApp = require("../../api/app");
 const supertest = require("supertest");
 
 const app = createApp();
 
 async function get_bearer_token() {
   const token = await supertest(app).post("/auth/login").send({
-    email: "user@email.com",
+    email: "test@email.com",
     password: "password",
   });
   return `Bearer ${token.res.text}`;

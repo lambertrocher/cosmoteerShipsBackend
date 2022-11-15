@@ -21,6 +21,7 @@ async function getOneBlueprint(blueprintId) {
       },
     });
   } catch (error) {
+    console.log(error);
     throw RepositoryError;
   }
   if (!blueprint) {
@@ -41,6 +42,7 @@ async function downloadOneBlueprintFile(blueprintId) {
     if (error.Code === "NoSuchKey") {
       throw BlueprintNotFoundError;
     } else {
+      console.log(error);
       throw FileStorageError;
     }
   }
@@ -53,6 +55,7 @@ async function searchBlueprint(searchBlueprintInput) {
       where: searchBlueprintInput.value,
     });
   } catch (error) {
+    console.log(error);
     throw RepositoryError;
   }
 }

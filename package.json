@@ -2,9 +2,10 @@
   "name": "cosmoteerships",
   "version": "1.0.0",
   "description": "aip to share Costomeer ships",
-  "main": "server.js",
+  "main": "api/server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "node api/server.js"
   },
   "author": "",
   "license": "ISC",
