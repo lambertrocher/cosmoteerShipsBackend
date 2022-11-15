@@ -1,7 +1,7 @@
 # Cosmoteer ships
 Api to share ship blueprints.
 
-# Prerequisites:
+# Prerequisites
 
 Tools to be installed on your system :
 - docker
