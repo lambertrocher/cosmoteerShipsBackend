@@ -1,6 +1,8 @@
 const supertest = require("supertest");
 const { app, get_common_headers } = require("./conf");
 
+//todo add more tests...
+
 describe("Test getting blueprints", () => {
   test("Getting one blueprint should return status ok", async () => {
     const response = await supertest(app)

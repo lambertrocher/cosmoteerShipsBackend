@@ -9,7 +9,7 @@ function auth(req, res, next) {
     req.decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (err) {
-    return res.send("Invalid token.");
+    return res.status(401).send("Invalid token.");
   }
 }
 
