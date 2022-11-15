@@ -1,7 +1,7 @@
 # Cosmoteer ships
 Api to share ship blueprints.
 
-# Prerequisites
+## Prerequisites
 
 Tools to be installed on your system :
 - docker
@@ -9,7 +9,7 @@ Tools to be installed on your system :
 - node
 - npm
 
-# Usage
+## Usage
 ```
 docker-compose up
 npm install
