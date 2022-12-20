@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { BlueprintsService } from './blueprints.service';
-import { Blueprint } from './interfaces/cat.interface';
+import { Blueprint } from './interfaces/blueprint.interface';
 import { CreateBlueprintDto } from './dto/create-blueprint.dto';
 
 @Controller('blueprints')

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Blueprint } from './interfaces/cat.interface';
+import { Blueprint } from './interfaces/blueprint.interface';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
