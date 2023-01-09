@@ -3,13 +3,34 @@ CreateTable
   "TableName": "users",
   "KeySchema": [
     {
-      "AttributeName": "id",
+      "AttributeName": "user_id",
       "KeyType": "HASH"
     }
   ],
   "AttributeDefinitions": [
     {
-      "AttributeName": "id",
+      "AttributeName": "user_id",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 10,
+    "WriteCapacityUnits": 10
+  }
+}
+
+CreateTable
+{
+  "TableName": "blueprints",
+  "KeySchema": [
+    {
+      "AttributeName": "blueprint_id",
+      "KeyType": "HASH"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "blueprint_id",
       "AttributeType": "S"
     }
   ],
