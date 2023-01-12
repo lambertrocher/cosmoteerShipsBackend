@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+} from '@nestjs/common';
 import { BlueprintsService } from './blueprints.service';
 import { Blueprint } from './interfaces/blueprint.interface';
 import { CreateBlueprintDto } from './dto/create-blueprint.dto';
@@ -7,22 +14,13 @@ import { CreateBlueprintDto } from './dto/create-blueprint.dto';
 export class BlueprintsController {
   constructor(private blueprintsService: BlueprintsService) {}
 
-  @Get('/login')
-  async login(@Query('code') code: string): Promise<string> {
-    console.log('calling login route');
-    const discordToken = await this.blueprintsService.getDiscordToken(code);
-    return await this.blueprintsService.verifyDiscordToken(discordToken);
-  }
-
   @Get(':id')
-  findOne(@Param() params): Blueprint {
-    console.log('get one');
-    return this.blueprintsService.findOne(params.id);
+  findOne(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.blueprintsService.findOne(id);
   }
 
-  @Get('/getall')
+  @Get('/')
   findAll(): Blueprint[] {
-    console.log('find all called');
     return this.blueprintsService.findAll();
   }
 
