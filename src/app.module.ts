@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { BlueprintsController } from './blueprints/blueprints.controller';
-import { BlueprintsService } from './blueprints/blueprints.service';
+import { ShipService } from './ship/service';
 import { ConfigModule } from '@nestjs/config';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
+import { ShipController } from "./ship/controller";
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import { AuthService } from './auth/auth.service';
       isGlobal: true,
     }),
   ],
-  controllers: [BlueprintsController, AuthController],
-  providers: [BlueprintsService, AuthService],
+  controllers: [ShipController, AuthController],
+  providers: [ShipService, AuthService],
 })
 export class AppModule {}
