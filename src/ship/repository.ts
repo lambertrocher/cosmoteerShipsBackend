@@ -1,28 +1,12 @@
 import { ShipEntity } from "./entity";
 import { DynamoDB } from "aws-sdk";
-
-export class InMemoryShipRepository {
-  private ships: ShipEntity[] = [];
-
-  findOne(id: string): ShipEntity {
-    return this.ships.find((ship) => ship.id === id);
-  }
-
-  findAll(): ShipEntity[] {
-    console.log("found ships: ", this.ships);
-    return this.ships;
-  }
-
-  create(ship: ShipEntity) {
-    this.ships.push(ship);
-    console.log("ship created: ", ship);
-  }
-}
+import { ConfigService } from "@nestjs/config";
 
 export class DynamoDBShipRepository {
+  private configService: ConfigService = new ConfigService();
   private dynamoDB = new DynamoDB.DocumentClient({
-    region: process.env.DYNAMODB_REGION,
-    endpoint: process.env.DYNAMODB_ENDPOINT,
+    region: this.configService.get<string>("DYNAMODB_REGION"),
+    endpoint: this.configService.get<string>("DYNAMODB_ENDPOINT"),
   });
   private tableName = "ship";
 

@@ -4,12 +4,14 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
-  Post,
-} from '@nestjs/common';
+  Post, UseGuards
+} from "@nestjs/common";
 import { ShipService } from './service';
 import { GetShipOutput, CreateShipInput } from "./dto";
+import { AuthGuard } from "../auth/auth.guard";
 
 @Controller('ships')
+@UseGuards(AuthGuard)
 export class ShipController {
   constructor(private shipsService: ShipService) {}
 
