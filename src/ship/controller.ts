@@ -8,7 +8,7 @@ import {
 } from "@nestjs/common";
 import { ShipService } from './service';
 import { GetShipOutput, CreateShipInput } from "./dto";
-import { AuthGuard } from "../auth/auth.guard";
+import { AuthGuard } from "../auth/guard";
 
 @Controller('ships')
 @UseGuards(AuthGuard)
