@@ -9,6 +9,7 @@ export class AuthService {
   private discord_base_url = this.configService.get<string>("DISCORD_BASE_URL");
 
   async getDiscordToken(code: string) {
+    console.log("getting discord token for code : ", code)
     const discord_token_url = `${(this.discord_base_url)}/oauth2/token`;
 
     const formData = {
@@ -36,9 +37,10 @@ export class AuthService {
 
     try {
       const response = await axios.get(discord_me_url, config);
+      console.log("Authenticated user: ", response.data)
       return response.data;
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
     }
   }
 }
