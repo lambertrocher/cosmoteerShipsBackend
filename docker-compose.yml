@@ -12,7 +12,7 @@
 
     node-api:
       build: .
-      command: ["npm", "run", "start:dev"]
+      command: ["node", "dist/main"]
       ports:
         - "3000:3000"
       working_dir: /app
