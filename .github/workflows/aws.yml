@@ -1,3 +1,6 @@
+# https://github.com/actions/starter-workflows/blob/main/deployments/aws.yml
+# additional documentation to help with iam policies https://github.com/aws-actions/amazon-ecs-deploy-task-definition#task-definition-file
+
 # This workflow will build and push a new container image to Amazon ECR,
 # and then will deploy a new task definition to Amazon ECS, when there is a push to the $default-branch branch.
 #
